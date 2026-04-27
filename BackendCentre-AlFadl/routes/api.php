@@ -26,5 +26,6 @@ Route::get('/admin/formations', [AdminController::class, 'getFormations']);
 
 Route::post('/admin/formations/stagiaires', [AdminController::class, 'store']);
 
+Route::get('/admin/villes', [VilleController::class, 'index']);
 
 Route::get('/admin/formationsSelect', [AdminController::class, 'getFormationsSelect']);

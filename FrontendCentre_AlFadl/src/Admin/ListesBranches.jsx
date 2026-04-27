@@ -16,9 +16,13 @@ import ÉlectricitéBâtiment from '../assets/iconsÉlectricitéBâtiment.png'
 
 function ListesBranches() {
     const [listesBranches, setListesBranches] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         axios.get(API + '/api/admin/formations')
             .then((res) => setListesBranches(res.data))
+            .catch((err) => console.error(err))
+            .finally(() => setLoading(false));
     }, []);
 
     const icons = {
@@ -44,10 +48,14 @@ function ListesBranches() {
     return (
         <>
             <h1 className="text-2xl font-bold text-gray-800 mt-4">Branches</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6 bg-blue-">
 
-                {
-                    listesBranches.map((branche, index) => {
+            {loading ? (
+                <div className="fixed inset-0 z-50 flex min-h-screen items-center justify-center bg-slate-950/30 ml-52">
+                    <div className="loader"></div>
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+                    {listesBranches.map((branche, index) => {
                         const icon = icons[branche.formation];
                         const couleurBorder = couleursBorders[branche.formation]
                         return (
@@ -62,8 +70,6 @@ function ListesBranches() {
 
                                     {/* header */}
                                     <div className="flex items-center gap-3 mb-3">
-
-
                                         <img
                                             src={icon}
                                             alt={branche.formation}
@@ -95,9 +101,9 @@ function ListesBranches() {
                             </div>
                         )
                     })}
-            </div>
+                </div>
+            )}
         </>
-
     )
 }
 
