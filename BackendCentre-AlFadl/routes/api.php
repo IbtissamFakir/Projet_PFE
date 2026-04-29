@@ -29,3 +29,7 @@ Route::post('/admin/formations/stagiaires', [AdminController::class, 'store']);
 Route::get('/admin/villes', [VilleController::class, 'index']);
 
 Route::get('/admin/formationsSelect', [AdminController::class, 'getFormationsSelect']);
+
+Route::get('/admin/stagiaires/{formation_id}', [AdminController::class, 'getStagiairesFormations']);
+Route::delete('/admin/stagiaires/{stagiaire}', [AdminController::class, 'destroy']);
+Route::put('/admin/stagiaires/{stagiaire}', [AdminController::class, 'update']);

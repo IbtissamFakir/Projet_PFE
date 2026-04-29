@@ -26,17 +26,20 @@ class DatabaseSeeder extends Seeder
             FormationSeeder::class,
         ]);
 
-        
         // 1️⃣ Tables indépendantes
-        $formations = \App\Models\Formation::factory(5)->create();
+        $formations = \App\Models\Formation::all();
         $modules    = \App\Models\Module::factory(10)->create();
         $typesEval  = \App\Models\TypeEvaluation::factory(3)->create();
         $users      = \App\Models\User::factory(10)->create();
 
-        // 2️⃣ Stagiaires liés à une formation
-        $stagiaires = \App\Models\Stagiaire::factory(30)->create([
-            'formation_id' => $formations->random()->id
-        ]);
+        // 2️⃣ Stagiaires liés à chaque formation
+        $stagiaires = collect();
+        foreach ($formations as $formation) {
+            $stagiairesPerFormation = \App\Models\Stagiaire::factory(25)->create([
+                'formation_id' => $formation->id,
+            ]);
+            $stagiaires = $stagiaires->concat($stagiairesPerFormation);
+        }
 
         // 3️⃣ Table pivot formation ↔ modules
         foreach ($formations as $formation) {

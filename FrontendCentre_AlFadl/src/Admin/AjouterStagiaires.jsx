@@ -45,49 +45,63 @@ function AjouterStagiaires() {
     timeoutAlerteRef.current = setTimeout(() => {
       setAlert(null);
       timeoutAlerteRef.current = null;
-    }, 1000);
+    }, 8000);
   };
-
-  function handleSubmit(e) {
+function handleSubmit(e) {
     e.preventDefault();
 
     const champsObligatoires = [
-      { key: "nom", label: "Nom" },
-      { key: "prenom", label: "Prénom" },
-      { key: "numTel", label: "Numéro de téléphone" },
-      { key: "dateDeNaissance", label: "Date de naissance" },
-      { key: "lieuDeNaissance", label: "Lieu de naissance" },
-      { key: "formation_id", label: "Branche" },
+        { key: "nom", label: "Nom" },
+        { key: "prenom", label: "Prénom" },
+        { key: "numTel", label: "Numéro de téléphone" },
+        { key: "dateDeNaissance", label: "Date de naissance" },
+        { key: "lieuDeNaissance", label: "Lieu de naissance" },
+        { key: "formation_id", label: "Branche" },
     ];
 
     const champManquant = champsObligatoires.find(
-      (field) => !champs[field.key] || champs[field.key].toString().trim() === ""
+        (field) =>
+            !champs[field.key] ||
+            champs[field.key].toString().trim() === ""
     );
 
     if (champManquant) {
-      showAlert({
-        type: "error",
-        message: `Le champ ${champManquant.label} est obligatoire.`,
-      });
-      return;
+        showAlert({
+            type: "error",
+            message: `Le champ ${champManquant.label} est obligatoire.`,
+        });
+        return;
+    }
+
+    if (!/^(06|07)\d{8}$/.test(champs.numTel)) {
+        showAlert({
+            type: "error",
+            message: "Numéro invalide (doit commencer par 06 ou 07 et contenir 10 chiffres)",
+        });
+        return;
     }
 
     axios.post(API + "/api/admin/formations/stagiaires", champs)
-      .then((res) => {
-        setAjouterStagiaires([...ajouterStagiaires, res.data]);
-        setChamps({});
-        showAlert({
-          type: "success",
-          message: "Le stagiaire a été ajouté avec succès.",
+        .then((res) => {
+            setAjouterStagiaires([...ajouterStagiaires, res.data]);
+            setChamps({});
+
+            showAlert({
+                type: "success",
+                message: "Le stagiaire a été ajouté avec succès.",
+            });
+        })
+        .catch((err) => {
+            const message =
+                err.response?.data?.message ||
+                "Erreur lors de l'enregistrement.";
+
+            showAlert({
+                type: "error",
+                message: message,
+            });
         });
-      })
-      .catch((err) => {
-        const message =
-          err.response?.data?.message ||
-          "Erreur lors de l'enregistrement.";
-        showAlert({ type: "error", message });
-      });
-  }
+}
 
   return (
     <div className="ml-64 p-6">
@@ -157,11 +171,11 @@ function AjouterStagiaires() {
           <div>
             <label className="block text-sm font-medium text-gray-700">Numéro de téléphone</label>
             <input
-              type="tel"
+              type="text"
               name="numTel"
               value={champs?.numTel || ""}
               onChange={handleChange}
-              placeholder="Entrer le nom "
+              placeholder="Entrer le numéro de téléphone"
               className="mt-1 block w-full rounded-xl border border-gray-400 px-3 py-2 text-sm shadow-sm"
             />
           </div>

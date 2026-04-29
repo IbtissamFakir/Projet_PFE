@@ -48,3 +48,12 @@
 .animate-slide-down {
   animation: slideDownFade 0.32s ease-out;
 }
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}

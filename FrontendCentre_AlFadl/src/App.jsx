@@ -4,6 +4,7 @@ import Page from "./Admin/Page";
 import Layout from "./Layout/Layout";
 import Dashboard from "./Admin/Dashboard";
 import AjouterStagiaires from "./Admin/AjouterStagiaires";
+import GestionListesBranches from "./Admin/GestionListesBranches";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/inscription" element={<AjouterStagiaires />} />
+        <Route path="/gestionStagiaires" element={<GestionListesBranches />} />
       </Route>
     </Routes>
   );

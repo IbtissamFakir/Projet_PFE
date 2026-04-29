@@ -15,10 +15,10 @@ class Stagiaire extends Model
     'lieuDeNaissance', 
     'numTel', 
     'dateInterruption', 
-    'dateInscription', // Assurez-vous que celui-ci est là
-    'formation_id', 
-    'statut'           // Et celui-ci aussi
-];
+    'dateInscription', 
+    'statut',
+    'formation_id'
+    ];     
 
     public function formation()
     {
