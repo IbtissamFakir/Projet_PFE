@@ -3,7 +3,7 @@ import axios from 'axios';
 import { API } from '../API/Api';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
-function ModifierStagiaire({ open, onClose, stagiaire, setStagiaires }) {
+function ModifierStagiaire({ open, onClose, stagiaire, stagiaires,setStagiaires }) {
     const [champs, setChamps] = useState({});
     const [formations, setFormations] = useState([]);
     const [cities, setCities] = useState([]);
@@ -14,12 +14,11 @@ function ModifierStagiaire({ open, onClose, stagiaire, setStagiaires }) {
     const timeoutAlerteRef = useRef(null);
 
     useEffect(() => {
-        // Charger formations
         axios.get(`${API}/api/admin/formationsSelect`)
             .then(res => setFormations(res.data))
             .catch(err => console.error(err));
 
-        // Charger villes
+        
         setCitiesLoading(true);
         axios.get(API + "/api/admin/villes")
             .then((res) => setCities(res.data))
@@ -60,9 +59,8 @@ function ModifierStagiaire({ open, onClose, stagiaire, setStagiaires }) {
 
     axios.put(`${API}/api/admin/stagiaires/${stagiaire.id}`, champs)
         .then((res) => {
-            // ✅ CORRECTION ICI : On fusionne (...s) avec (...res.data)
-            // Cela évite de perdre le 'statut' ou d'autres champs non présents dans le formulaire
-            setStagiaires(prev => prev.map(s => 
+
+            setStagiaires(stagiaires.map(s => 
                 s.id === stagiaire.id ? { ...s, ...res.data } : s
             ));
 
@@ -85,7 +83,6 @@ function ModifierStagiaire({ open, onClose, stagiaire, setStagiaires }) {
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
 
-            {/* ALERT BOX */}
             {alert && (
                 <div className="fixed left-1/2 top-6 z-[110] -translate-x-1/2 transition-all duration-500">
                     <div className={`flex items-center gap-3 rounded-xl border px-5 py-3 shadow-xl backdrop-blur-md ${
@@ -96,7 +93,6 @@ function ModifierStagiaire({ open, onClose, stagiaire, setStagiaires }) {
                 </div>
             )}
 
-            {/* MODAL CONTENT */}
             <div className="bg-[#F8F9FA] rounded-[2.5rem] shadow-2xl w-full max-w-2xl p-8 md:p-10 relative animate-in fade-in zoom-in duration-200">
                 
                 <button onClick={onClose} className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition">
@@ -107,7 +103,6 @@ function ModifierStagiaire({ open, onClose, stagiaire, setStagiaires }) {
 
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
                     
-                    {/* Nom & Prénom */}
                     <div className="flex flex-col gap-1.5">
                         <label className="text-sm font-bold text-gray-700 ml-1">Nom</label>
                         <input name="nom" value={champs.nom || ''} onChange={handleChange} placeholder="Nom"
@@ -120,7 +115,6 @@ function ModifierStagiaire({ open, onClose, stagiaire, setStagiaires }) {
                             className="p-3.5 rounded-2xl border border-gray-200 bg-[#F1F3F5] outline-none font-medium" required />
                     </div>
 
-                    {/* Téléphone & Date de Naissance */}
                     <div className="flex flex-col gap-1.5">
                         <label className="text-sm font-bold text-gray-700 ml-1">Téléphone</label>
                         <input type="text" name="numTel" value={champs.numTel || ''} onChange={handleChange} placeholder="06XXXXXXXX"
@@ -133,7 +127,6 @@ function ModifierStagiaire({ open, onClose, stagiaire, setStagiaires }) {
                             className="p-3.5 rounded-2xl border border-gray-200 bg-[#F1F3F5] outline-none font-medium" required />
                     </div>
 
-                    {/* Lieu de naissance & Date d'interruption */}
                     <div className="flex flex-col gap-1.5">
                         <label className="text-sm font-bold text-gray-700 ml-1">Lieu de naissance</label>
                         <input type="text" name="lieuDeNaissance" list="villes-list-mod" value={champs.lieuDeNaissance || ""} onChange={handleChange}
@@ -150,7 +143,6 @@ function ModifierStagiaire({ open, onClose, stagiaire, setStagiaires }) {
                             className="p-3.5 rounded-2xl border border-gray-200 bg-[#F1F3F5] outline-none font-medium text-gray-500" />
                     </div>
 
-                    {/* Branche (Full width) */}
                     <div className="md:col-span-2 flex flex-col gap-1.5">
                         <label className="text-sm font-bold text-gray-700 ml-1">Branche</label>
                         <div className="relative">
@@ -165,7 +157,6 @@ function ModifierStagiaire({ open, onClose, stagiaire, setStagiaires }) {
                         </div>
                     </div>
 
-                    {/* Actions */}
                     <div className="md:col-span-2 flex justify-end gap-4 mt-8">
                         <button type="button" onClick={onClose} 
                             className="px-10 py-3 bg-white border border-gray-300 rounded-2xl font-bold text-gray-600 hover:bg-gray-50 transition active:scale-95">

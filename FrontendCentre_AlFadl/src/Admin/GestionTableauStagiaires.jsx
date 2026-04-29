@@ -187,6 +187,7 @@ function GestionTableauStagiaires({ selectedFormation }) {
                 open={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 stagiaire={stagiaireEdit}
+                stagiaires={stagiaires}
                 setStagiaires={setStagiaires}
             />
         </div>

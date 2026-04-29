@@ -72,16 +72,14 @@ function Dashboard() {
         </div>
 
         <div className="bg-white rounded-xl shadow-lg w-56 border border-gray-100 overflow-hidden relative">
-          {/* Ligne de couleur en haut */}
           <div className="h-2 w-full bg-green-400"></div>
 
           <div className="p-4 flex items-center">
-            {/* Conteneur de l'icône */}
+
             <div className="bg-green-400 p-2 rounded-xl text-white mr-4">
               <BookOpenIcon className="w-6 h-6" />
             </div>
 
-            {/* Texte */}
             <div>
               <p className="font-bold text-gray-500 leading-tight">
                 Total

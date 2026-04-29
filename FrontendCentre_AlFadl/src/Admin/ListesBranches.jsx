@@ -63,12 +63,10 @@ function ListesBranches() {
                                 key={index}
                                 className="bg-white rounded-xl shadow-lg border border-gray-100 w-72 overflow-hidden hover:shadow-md transition"
                             >
-                                {/* top bar bleu */}
                                 <div className={couleurBorder}></div>
 
                                 <div className="p-4">
 
-                                    {/* header */}
                                     <div className="flex items-center gap-3 mb-3">
                                         <img
                                             src={icon}
@@ -81,7 +79,6 @@ function ListesBranches() {
                                         </h3>
                                     </div>
 
-                                    {/* formateur */}
                                     <p className="text-xs text-gray-400 mb-2 font-bold ">
                                         Formateur :
                                         <span className="text-gray-700 ml-16 font-bold ">
@@ -89,7 +86,6 @@ function ListesBranches() {
                                         </span>
                                     </p>
 
-                                    {/* stagiaires */}
                                     <p className="text-xs text-gray-400 flex justify-between font-bold">
                                         Stagiaires
                                         <span className="font-bold text-sm text-blue-500">

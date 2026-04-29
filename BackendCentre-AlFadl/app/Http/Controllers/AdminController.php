@@ -148,7 +148,6 @@ public function update(Request $request, Stagiaire $stagiaire)
             'required',
             'regex:/^(06|07)[0-9]{8}$/'
         ],
-        // AJOUTEZ CES DEUX LIGNES POUR QUE LA BRANCHE SOIT ENREGISTRÉE
         'formation_id' => 'required|exists:formations,id',
         'dateInterruption' => 'nullable|date',
     ], [
@@ -156,19 +155,16 @@ public function update(Request $request, Stagiaire $stagiaire)
         'numTel.regex' => 'Le numéro doit commencer par 06 ou 07 et contenir 10 chiffres.',
     ]);
 
-    // Mise à jour de TOUS les champs envoyés par le formulaire
     $stagiaire->update([
         'nom' => $request->nom,
         'prenom' => $request->prenom,
         'dateDeNaissance' => $request->dateDeNaissance,
         'lieuDeNaissance' => $request->lieuDeNaissance,
         'numTel' => $request->numTel,
-        'formation_id' => $request->formation_id, // Important !
-        'dateInterruption' => $request->dateInterruption, // Important !
+        'formation_id' => $request->formation_id, 
+        'dateInterruption' => $request->dateInterruption, 
     ]);
 
-    // ✅ IMPORTANT : Renvoyer l'objet stagiaire DIRECTEMENT
-    // Cela permet à React de faire { ...s, ...res.data } correctement
     return response()->json($stagiaire->refresh());
 }
 }
