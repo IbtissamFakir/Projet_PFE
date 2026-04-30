@@ -82,22 +82,22 @@ function GestionListesBranches() {
         'Cuisine et pâtisserie': 'h-2 w-full bg-orange-600',
     }
     return (
-        <div className="ml-64 p-6 bg-gray-100">
-            <h1 className="text-2xl font-bold text-gray-800 mt-4">Gestion des stagiaires</h1>
+        <div className="p-4 md:p-6 bg-gray-100 min-h-screen">
+            <h1 className="text-xl md:text-2xl font-bold text-gray-800 mt-4">Gestion des stagiaires</h1>
 
             {loading ? (
                 <Loading />
             ) : (
-                <div className="p-6">
-                    <div className="relative w-full flex items-center">
+                <div className="py-6">
+                    <div className="relative w-full flex items-center group">
                         <button
                             onClick={() => handleScroll('left')}
-                            className="absolute left-0 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border bg-white shadow hover:bg-gray-50"
+                            className="absolute -left-2 md:left-0 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border bg-white shadow-md hover:bg-gray-50 transition-all"
                         >
                             <ChevronLeftIcon className="w-6 h-6" />
                         </button>
 
-                        <div className="flex gap-8 mx-auto">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-nowrap gap-4 md:gap-8 mx-auto w-full px-10">
                             {listesBranches
                                 .slice(startIndex, startIndex + itemsPerPage)
                                 .map((branche, index) => {
@@ -105,14 +105,13 @@ function GestionListesBranches() {
                                     const couleurBorderTop = couleursBorders[branche.formation];
                                     const activeClasses = couleursActiveRing[branche.formation];
                                     const texteColor = couleursTextes[branche.formation];
-
                                     const isActive = selectedFormation === branche.formation_id;
 
                                     return (
                                         <div
                                             key={index}
                                             onClick={() => setSelectedFormation(branche.formation_id)}
-                                            className={`relative w-56 bg-white rounded-xl shadow-lg border transition-all 
+                                            className={`relative w-full lg:w-56 bg-white rounded-xl shadow-lg border transition-all 
                                                 duration-300 cursor-pointer overflow-hidden
                                                 ${isActive
                                                     ? `ring-4 ring-opacity-40 scale-105 ${activeClasses}`
@@ -123,7 +122,7 @@ function GestionListesBranches() {
 
                                             <div className="p-4">
                                                 <div className="flex items-center gap-3 mb-3">
-                                                    <img src={icon} alt="" className="w-10" />
+                                                    <img src={icon} alt="" className="w-10 h-10 object-contain" />
                                                     <h3 className={`text-sm font-bold ${isActive ? texteColor : 'text-gray-800'}`}>
                                                         {branche.formation}
                                                     </h3>
@@ -151,7 +150,7 @@ function GestionListesBranches() {
 
                         <button
                             onClick={() => handleScroll('right')}
-                            className="absolute right-0 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border bg-white shadow hover:bg-gray-50"
+                            className="absolute -right-2 md:right-0 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border bg-white shadow-md hover:bg-gray-50 transition-all"
                         >
                             <ChevronRightIcon className="w-6 h-6" />
                         </button>

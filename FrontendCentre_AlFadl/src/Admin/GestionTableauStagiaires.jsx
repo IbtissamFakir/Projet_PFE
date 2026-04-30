@@ -68,44 +68,40 @@ function GestionTableauStagiaires({ selectedFormation }) {
         setIsModalOpen(true);
     }
 
+    
     return (
-        <div className="w-full">
+        <div className="w-full mt-6">
             {alert && (
-                <div className="fixed left-1/2 top-6 z-50 -translate-x-1/2">
+                <div className="fixed left-1/2 top-6 z-[60] -translate-x-1/2 w-[90%] max-w-sm">
                     <div className={`flex items-center gap-3 rounded-xl border px-5 py-3 shadow-md backdrop-blur-md ${alert.type === "success"
                             ? "bg-slate-900/95 border-emerald-500/20 text-emerald-400"
                             : "bg-red-100 border-rose-500/20 text-red-700"
                         }`}>
-
-                        <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${alert.type === "success"
+                        <div className={`flex h-8 w-8 items-center justify-center rounded-lg flex-shrink-0 ${alert.type === "success"
                                 ? "bg-emerald-500/10"
                                 : "bg-rose-500/10"
                             }`}>
                             {alert.type === "success" ? "✓" : "!"}
                         </div>
-
-                        <p className="text-sm font-semibold">
-                            {alert.message}
-                        </p>
-
+                        <p className="text-sm font-semibold">{alert.message}</p>
                     </div>
                 </div>
             )}
+
             {!selectedFormation ? (
-                <div className="flex flex-col items-center justify-center py-32 bg-white rounded-3xl border border-gray-100 shadow-sm">
+                <div className="flex flex-col items-center justify-center py-20 md:py-32 bg-white rounded-3xl border border-gray-100 shadow-sm px-4 text-center">
                     <div className="p-4 bg-blue-50 rounded-full mb-4">
-                        <UsersIcon className='w-12 h-12 text-blue-400' />
+                        <UsersIcon className='w-10 h-10 md:w-12 md:h-12 text-blue-400' />
                     </div>
                     <p className='text-gray-600 font-semibold text-lg'>Sélectionnez une branche</p>
                     <p className='text-gray-400 text-sm'>Choisissez une formation pour gérer ses stagiaires.</p>
                 </div>
             ) : (
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-
-                    <div className="flex border-b bg-gray-50">
+                    <div className="flex overflow-x-auto border-b bg-gray-50 no-scrollbar">
                         <button
                             onClick={() => setFiltre('valide')}
-                            className={`px-6 py-3 text-sm font-semibold border-b-2 transition ${filtre === 'valide'
+                            className={`px-4 md:px-6 py-3 text-sm font-semibold border-b-2 transition whitespace-nowrap ${filtre === 'valide'
                                 ? 'border-green-500 text-green-600 bg-white'
                                 : 'border-transparent text-gray-500 hover:text-gray-700'
                                 }`}
@@ -118,7 +114,7 @@ function GestionTableauStagiaires({ selectedFormation }) {
 
                         <button
                             onClick={() => setFiltre('attente')}
-                            className={`px-6 py-3 text-sm font-semibold border-b-2 transition ${filtre === 'attente'
+                            className={`px-4 md:px-6 py-3 text-sm font-semibold border-b-2 transition whitespace-nowrap ${filtre === 'attente'
                                 ? 'border-orange-500 text-orange-600 bg-white'
                                 : 'border-transparent text-gray-500 hover:text-gray-700'
                                 }`}
@@ -133,27 +129,27 @@ function GestionTableauStagiaires({ selectedFormation }) {
                     {stagiairesFiltres.length > 0 ? (
                         <div className="overflow-x-auto">
                             <table className="min-w-full divide-y divide-gray-200">
-                                <thead className="bg-gray-50 text-[11px] font-bold text-gray-500 uppercase tracking-[0.1em]">
+                                <thead className="bg-gray-50 text-[10px] md:text-[11px] font-bold text-gray-500 uppercase tracking-[0.1em]">
                                     <tr>
-                                        <th className="px-6 py-4 text-left">Stagiaire</th>
-                                        <th className="px-6 py-4 text-left">Date de Naissance</th>
-                                        <th className="px-6 py-4 text-left">Lieu</th>
-                                        <th className="px-6 py-4 text-left">Téléphone</th>
-                                        <th className="px-6 py-4 text-left text-emerald-600">Inscription</th>
-                                        <th className="px-6 py-4 text-left text-red-500">Interruption</th>
-                                        <th className="px-6 py-4 text-center">Actions</th>
+                                        <th className="px-4 md:px-6 py-4 text-left">Stagiaire</th>
+                                        <th className="px-4 md:px-6 py-4 text-left">Naissance</th>
+                                        <th className="px-4 md:px-6 py-4 text-left">Lieu</th>
+                                        <th className="px-4 md:px-6 py-4 text-left">Téléphone</th>
+                                        <th className="px-4 md:px-6 py-4 text-left text-emerald-600">Inscription</th>
+                                        <th className="px-4 md:px-6 py-4 text-left text-red-500">Interruption</th>
+                                        <th className="px-4 md:px-6 py-4 text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-100">
                                     {stagiairesFiltres.map((stagiaire) => (
                                         <tr key={stagiaire.id} className="hover:bg-gray-50 transition">
-                                            <td className="px-6 py-4 font-bold text-gray-800">{stagiaire.nom} {stagiaire.prenom}</td>
-                                            <td className="px-6 py-4 text-sm text-gray-600">{stagiaire.dateDeNaissance}</td>
-                                            <td className="px-6 py-4 text-sm text-gray-500">{stagiaire.lieuDeNaissance}</td>
-                                            <td className="px-6 py-4 text-sm text-gray-700">{stagiaire.numTel}</td>
-                                            <td className="px-6 py-4 text-sm font-semibold text-emerald-600">{stagiaire.dateInscription}</td>
-                                            <td className="px-6 py-4 text-sm text-red-500 font-semibold">{stagiaire.dateInterruption || '-'}</td>
-                                            <td className="px-6 py-4 text-center">
+                                            <td className="px-4 md:px-6 py-4 font-bold text-gray-800 whitespace-nowrap text-sm">{stagiaire.nom} {stagiaire.prenom}</td>
+                                            <td className="px-4 md:px-6 py-4 text-sm text-gray-600 whitespace-nowrap">{stagiaire.dateDeNaissance}</td>
+                                            <td className="px-4 md:px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{stagiaire.lieuDeNaissance}</td>
+                                            <td className="px-4 md:px-6 py-4 text-sm text-gray-700 whitespace-nowrap">{stagiaire.numTel}</td>
+                                            <td className="px-4 md:px-6 py-4 text-sm font-semibold text-emerald-600 whitespace-nowrap">{stagiaire.dateInscription}</td>
+                                            <td className="px-4 md:px-6 py-4 text-sm text-red-500 font-semibold whitespace-nowrap">{stagiaire.dateInterruption || '-'}</td>
+                                            <td className="px-4 md:px-6 py-4 text-center">
                                                 <div className="flex justify-center space-x-2">
                                                     <button
                                                         className="p-2 text-blue-600 bg-blue-50 hover:bg-blue-600 hover:text-white rounded-lg transition"

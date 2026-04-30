@@ -1,7 +1,9 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { API } from '../API/Api';
+import Loading from './Loading';
 
+// Import des images...
 import ConfectionCouture from '../assets/iconsConfectionCouture.png';
 import ConstructionBalles from '../assets/iconsConstructionBalles.png';
 import CuisinePâtisserie from '../assets/iconsCuisinePâtisserie.png';
@@ -9,7 +11,6 @@ import RasageMasculin from '../assets/iconsRasagemasculin.png';
 import RasageFeminin from '../assets/iconsRasage feminin.png';
 import Informatique from '../assets/iconsInformatique.png';
 import ÉlectricitéBâtiment from '../assets/iconsÉlectricitéBâtiment.png';
-import Loading from './Loading';
 
 function ListesBranches() {
     const [listesBranches, setListesBranches] = useState([]);
@@ -33,52 +34,63 @@ function ListesBranches() {
     };
 
     const couleursBorders = {
-        'Confection et couture': 'h-2 w-full bg-purple-800',
-        'Rasage masculin': 'h-2 w-full bg-blue-900',
-        'Rasage féminin': 'h-2 w-full bg-pink-500',
-        'Électricité du bâtiment': 'h-2 w-full bg-yellow-400',
-        'Construction de balles': 'h-2 w-full bg-blue-700',
-        'Informatique': 'h-2 w-full bg-green-700',
-        'Cuisine et pâtisserie': 'h-2 w-full bg-orange-600',
+        'Confection et couture': 'bg-purple-800',
+        'Rasage masculin': 'bg-blue-900',
+        'Rasage féminin': 'bg-pink-500',
+        'Électricité du bâtiment': 'bg-yellow-400',
+        'Construction de balles': 'bg-blue-700',
+        'Informatique': 'bg-green-700',
+        'Cuisine et pâtisserie': 'bg-orange-600',
     };
 
     return (
-        <>
-            <h1 className="text-2xl font-bold text-gray-800 mt-4">Branches</h1>
+        <div className="mt-10">
+            <h1 className="text-2xl font-bold text-gray-800 mb-6">Branches</h1>
 
             {loading ? (
-                <Loading/>
+                <Loading />
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {listesBranches.map((branche, index) => {
                         const icon = icons[branche.formation];
-                        const couleurBorder = couleursBorders[branche.formation];
+                        const couleurBg = couleursBorders[branche.formation] || 'bg-gray-400';
+                        
                         return (
                             <div
                                 key={index}
-                                className="bg-white rounded-xl shadow-lg border border-gray-100 w-72 overflow-hidden hover:shadow-md transition"
+                                className="bg-white rounded-xl shadow-lg border border-gray-100 w-full overflow-hidden hover:shadow-xl transition-shadow duration-300"
                             >
-                                <div className={couleurBorder}></div>
-                                <div className="p-4">
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <img src={icon} alt={branche.formation} className="w-10" />
-                                        <h3 className="text-sm font-bold text-gray-800">{branche.formation}</h3>
+                                <div className={`h-2 w-full ${couleurBg}`}></div>
+                                <div className="p-5">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <img src={icon} alt="" className="w-10 h-10 object-contain" />
+                                        <h3 className="text-sm font-bold text-gray-800 line-clamp-1">
+                                            {branche.formation}
+                                        </h3>
                                     </div>
-                                    <p className="text-xs text-gray-400 mb-2 font-bold ">
-                                        Formateur :
-                                        <span className="text-gray-700 ml-16 font-bold ">{branche.formateur}</span>
-                                    </p>
-                                    <p className="text-xs text-gray-400 flex justify-between font-bold">
-                                        Stagiaires
-                                        <span className="font-bold text-sm text-blue-500">{branche.nombreStagaires} / 20</span>
-                                    </p>
+                                    
+                                    <div className="space-y-3">
+                                        <div className="flex justify-between items-center text-xs">
+                                            <span className="text-gray-400 font-bold uppercase">Formateur</span>
+                                            <span className="text-gray-700 font-bold">{branche.formateur}</span>
+                                        </div>
+                                        
+                                        <div className="flex justify-between items-center text-xs">
+                                            <span className="text-gray-400 font-bold uppercase">Stagiaires</span>
+                                            <span className="font-bold text-sm text-blue-500">
+                                                {branche.nombreStagaires} <span className="text-gray-300">/ 20</span>
+                                            </span>
+                                        </div>
+                                        
+                                      
+                                    </div>
                                 </div>
                             </div>
                         );
                     })}
                 </div>
             )}
-        </>
+        </div>
     );
 }
 

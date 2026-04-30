@@ -104,11 +104,11 @@ function handleSubmit(e) {
 }
 
   return (
-    <div className="ml-64 p-6 bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-6 max-w-3xl mt-16 ml-24">
+    <div className="p-4 md:p-6">
+      <div className="bg-white shadow-lg rounded-lg p-6 max-w-3xl mx-auto mt-10">
         
         {alert && (
-          <div className="fixed left-1/2 top-6 z-50 -translate-x-1/2 transition-all duration-500 ease-in-out">
+          <div className="fixed left-1/2 top-6 z-50 -translate-x-1/2 transition-all duration-500 ease-in-out w-[90%] md:w-auto">
             <div
               className={`flex items-center gap-3 rounded-xl border px-5 py-3 shadow-md backdrop-blur-md ${
                 alert.type === "success"
@@ -134,14 +134,14 @@ function handleSubmit(e) {
           </div>
         )}
 
-        <div className="flex items-center gap-2 mb-6 mt-6 ml-16">
+        <div className="flex items-center gap-2 mb-6 mt-6 md:ml-4">
           <UserPlusIcon className="w-6 h-6 text-blue-600" />
           <h3 className="text-xl font-bold text-gray-800">Nouveau Stagiaire</h3>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-2 gap-x-6 gap-y-4 ml-3"
+          className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4"
         >
           <div>
             <label className="block text-sm font-medium text-gray-700">Nom</label>
@@ -191,7 +191,7 @@ function handleSubmit(e) {
             />
           </div>
 
-          <div className="relative max-w-sm">
+          <div className="relative w-full">
             <label className="block text-sm font-medium text-gray-700">Lieu de naissance</label>
             <input
               type="text"
@@ -220,7 +220,7 @@ function handleSubmit(e) {
             />
           </div>
 
-          <div className="col-span-2">
+          <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700">Branche</label>
             <select
               name="formation_id"
@@ -237,7 +237,7 @@ function handleSubmit(e) {
             </select>
           </div>
 
-          <div className="col-span-2">
+          <div className="md:col-span-2">
             <button
               type="submit"
               className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow hover:bg-blue-700"
