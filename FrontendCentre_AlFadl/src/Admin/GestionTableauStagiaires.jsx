@@ -151,7 +151,7 @@ function GestionTableauStagiaires({ selectedFormation }) {
                                             <td className="px-6 py-4 text-sm text-gray-600">{stagiaire.dateDeNaissance}</td>
                                             <td className="px-6 py-4 text-sm text-gray-500">{stagiaire.lieuDeNaissance}</td>
                                             <td className="px-6 py-4 text-sm text-gray-700">{stagiaire.numTel}</td>
-                                            <td className="px-6 py-4 text-sm font-semibold">{stagiaire.dateInscription}</td>
+                                            <td className="px-6 py-4 text-sm font-semibold text-emerald-600">{stagiaire.dateInscription}</td>
                                             <td className="px-6 py-4 text-sm text-red-500 font-semibold">{stagiaire.dateInterruption || '-'}</td>
                                             <td className="px-6 py-4 text-center">
                                                 <div className="flex justify-center space-x-2">

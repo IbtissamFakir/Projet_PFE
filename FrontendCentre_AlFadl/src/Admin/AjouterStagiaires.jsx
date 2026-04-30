@@ -104,7 +104,7 @@ function handleSubmit(e) {
 }
 
   return (
-    <div className="ml-64 p-6">
+    <div className="ml-64 p-6 bg-gray-100">
       <div className="bg-white shadow-lg rounded-lg p-6 max-w-3xl mt-16 ml-24">
         
         {alert && (

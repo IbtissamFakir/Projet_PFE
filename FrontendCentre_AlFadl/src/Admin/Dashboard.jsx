@@ -22,7 +22,7 @@ function Dashboard() {
         .then(response=>setStatistiques(response.data))
   },[statistiques]);
   return (
-    <div className="ml-64 p-6">
+    <div className="ml-64 p-6 bg-gray-100">
       <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
       <p className="text-gray-500 font-normal mt-2">
         Vue d'ensemble du centre Al Fadl

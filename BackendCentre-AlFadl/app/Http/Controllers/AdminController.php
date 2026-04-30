@@ -37,7 +37,7 @@ class AdminController extends Controller
         return response()->json($resultat);
     }
 
-    public function store(Request $request)
+    public function storeStagiaire(Request $request)
     {
         $request->validate([
             'nom' => 'required|string',
@@ -95,7 +95,7 @@ class AdminController extends Controller
 
         return response()->json($stagiaires);
     }
-    public function destroy(Stagiaire $stagiaire)
+    public function destroyStagiaire(Stagiaire $stagiaire)
     {
         $formationId = $stagiaire->formation_id;
         $statutSupprime = $stagiaire->statut;
@@ -128,7 +128,7 @@ class AdminController extends Controller
             'message' => 'Stagiaire supprimé et mise à jour automatique effectuée'
         ]);
     }
-public function update(Request $request, Stagiaire $stagiaire)
+public function updateStagiaire(Request $request, Stagiaire $stagiaire)
 {
     $request->validate([
         'nom' => 'required|string',

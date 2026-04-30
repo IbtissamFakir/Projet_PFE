@@ -24,12 +24,12 @@ Route::get('/admin/statistiques', [AdminController::class, 'getStatistiques']);
 
 Route::get('/admin/formations', [AdminController::class, 'getFormations']);
 
-Route::post('/admin/formations/stagiaires', [AdminController::class, 'store']);
+Route::post('/admin/formations/stagiaires', [AdminController::class, 'storeStagiaire']);
 
 Route::get('/admin/villes', [VilleController::class, 'index']);
 
 Route::get('/admin/formationsSelect', [AdminController::class, 'getFormationsSelect']);
 
 Route::get('/admin/stagiaires/{formation_id}', [AdminController::class, 'getStagiairesFormations']);
-Route::delete('/admin/stagiaires/{stagiaire}', [AdminController::class, 'destroy']);
-Route::put('/admin/stagiaires/{stagiaire}', [AdminController::class, 'update']);
+Route::delete('/admin/stagiaires/{stagiaire}', [AdminController::class, 'destroyStagiaire']);
+Route::put('/admin/stagiaires/{stagiaire}', [AdminController::class, 'updateStagiaire']);
