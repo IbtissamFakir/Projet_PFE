@@ -9,14 +9,12 @@ class Formation extends Model
 {
     use HasFactory;
 
-    public function stagiaires()
-    {
-        return $this->hasMany(Stagiaire::class, 'formation_id');
-    }
+    // Indique à Laravel que la table s'appelle bien "formations"
+    protected $table = 'formations';
 
-    public function modules()
-    {
-        return $this->belongsToMany(Module::class, 'formation_modules', 'formation_id', 'module_id');
-    }
+    public $timestamps = false;
 
+    protected $fillable = ['intitule', 'masseHoraire'];
+
+   
 }

@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Sortie extends Model
 {
-    use HasFactory;
+    protected $table = 'sorties';
 
-    public function formateur()
-    {
-        return $this->belongsTo(User::class, 'formateur_id');
-    }
+    // Assure-toi que l'orthographe est EXACTEMENT celle-ci
+    protected $fillable = [
+        'dateSortie', 
+        'lieuSortie', 
+        'formateur_id'
+    ];
 
+    // Comme ta table n'a pas l'air d'avoir created_at/updated_at sur l'image
+    public $timestamps = true; 
 }
