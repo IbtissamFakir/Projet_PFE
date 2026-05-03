@@ -1,22 +1,21 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\RecupererDonnees;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+Route::post('/login', [LoginController::class, 'login']);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/admin/create-formateur', [AdminController::class, 'store']);
+    Route::get('/admin/get-branches', [RecupererDonnees::class, 'getBranches']);
+    Route::get('/admin/get-modules', [RecupererDonnees::class, 'getModules']);
+    Route::get('/admin/get-formateurs', [RecupererDonnees::class, 'getFormateurs']);
+    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::delete('/admin/supprimer-formateur/{id}', [AdminController::class, 'destroy']);
 });
 Route::get('/formation',[AdminController::class, 'show']);
 Route::get('/formation/sorties/{id}',[AdminController::class, 'index']);

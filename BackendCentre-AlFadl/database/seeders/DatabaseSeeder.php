@@ -456,5 +456,10 @@ class DatabaseSeeder extends Seeder
         foreach ($notes as $note) {
             Note::create($note);
         }
+        $this->call([
+            AdminSeeder::class,
+            FormationsSeeder::class,
+        ]);
+
     }
 }
