@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Stagiaire extends Model
 {
     use HasFactory;
+    
 
     public function formation()
     {
